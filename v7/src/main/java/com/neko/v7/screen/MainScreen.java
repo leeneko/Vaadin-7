@@ -52,7 +52,7 @@ public class MainScreen extends HorizontalLayout {
 		// 동적 변경 뷰 영역이 빈 영역 모두 사용하기
 		setExpandRatio(viewArea, 1);
 		setSizeFull();
-		
+		/*
 		Label label = new Label(UserSession.getUser().getId());
 		final Button signout = new Button("Sign Out"); // 로그아웃 버튼
 		signout.addClickListener(new ClickListener() {
@@ -63,6 +63,7 @@ public class MainScreen extends HorizontalLayout {
 		});
 		addComponent(label);
 		addComponent(signout);
+		*/
 		
 		//View가 동적으로 바뀌어 보이게 되는 빈 Layout
 		CssLayout viewContainer = new CssLayout();

@@ -42,6 +42,7 @@ public class UserForm extends AbstractForm<User> {
 	}
 	public void lazyInit(User user) {
 		User item = new User(user);
+		System.out.println(item.getId());
 		// item 정보를 fieldGroup bind 처리
 		// fieldGroup.bind(id, "id");
 		// fieldGroup.bind(password, "password");
@@ -50,6 +51,9 @@ public class UserForm extends AbstractForm<User> {
 		fieldGroup.setItemDataSource(new BeanItem<User>(item)); // fieldGroup에 데이터 그룹화
 		
 		// 만약 신규 유저로 값이 없으면 null 대신 ""로 표시
+		if() {
+			id.setValue();
+		}
 		id.setNullRepresentation("");
 		password.setNullRepresentation("");
 		
