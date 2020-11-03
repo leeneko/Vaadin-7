@@ -58,7 +58,6 @@ public class UserView extends VerticalLayout implements View {
 			public void buttonClick(ClickEvent event) {
 				// UserForm을 여기서 sub-window로 팝업 연동
 				User user = new User();
-				System.out.println(user.toString());
 				userForm.lazyInit(new User());
 				userForm.openPopup("New User");
 			}

@@ -42,7 +42,6 @@ public class UserForm extends AbstractForm<User> {
 	}
 	public void lazyInit(User user) {
 		User item = new User(user);
-		System.out.println(item.getId());
 		// item 정보를 fieldGroup bind 처리
 		// fieldGroup.bind(id, "id");
 		// fieldGroup.bind(password, "password");
@@ -51,8 +50,10 @@ public class UserForm extends AbstractForm<User> {
 		fieldGroup.setItemDataSource(new BeanItem<User>(item)); // fieldGroup에 데이터 그룹화
 		
 		// 만약 신규 유저로 값이 없으면 null 대신 ""로 표시
-		if() {
-			id.setValue();
+		if(item.getId() == null) {
+			id.setValue("");
+		} else {
+			id.setValue(item.getId());
 		}
 		id.setNullRepresentation("");
 		password.setNullRepresentation("");
@@ -123,14 +124,16 @@ public class UserForm extends AbstractForm<User> {
 		try {
 			fieldGroup.commit();
 			User item = fieldGroup.getItemDataSource().getBean();
+			if (item.getId() == null) {
+				item.setId(id.getValue());
+			}
 			User entity = userData.save(item);
 			entity.setPw(password.getValue()); // 변경된 비밀번호
 			
 			if (UserSession.getUser().getId() == entity.getId()) {
 				UserSession.setUser(entity);
 			}
-			String sql = "SET NOCOUNT ON; EXEC update_reg_user '" + entity.getId() + "', '" + entity.getPw() + "';";
-			// System.out.println(sql);
+			String sql = "SET NOCOUNT ON; EXEC update_reg_user '" + entity.getId() + "', '" + entity.getPw() + "', '" + entity.getRole() + "';";
 			dbconn.conn = dbconn.getConnection();
 			dbconn.pst = dbconn.conn.prepareStatement(sql);
 			dbconn.pst.executeUpdate();
@@ -154,9 +157,8 @@ public class UserForm extends AbstractForm<User> {
 			getDeleteHandler().onDelete(item);
 			
 			dbconn = new DBConnection();
-			String input_id = UserSession.getUser().getId();
+			String input_id = item.getId();
 			String sql = "EXEC delete_reg_user '" + input_id + "';";
-			System.out.println("NEKO] EXECUTE SQL : " + sql);
 			dbconn.conn = dbconn.getConnection();
 			dbconn.pst = dbconn.conn.prepareStatement(sql);
 			dbconn.pst.execute();
