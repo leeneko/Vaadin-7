@@ -57,7 +57,6 @@ public class UserView extends VerticalLayout implements View {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				// UserForm을 여기서 sub-window로 팝업 연동
-				User user = new User();
 				userForm.lazyInit(new User());
 				userForm.openPopup("New User");
 			}
@@ -87,7 +86,7 @@ public class UserView extends VerticalLayout implements View {
 		table.addItemClickListener(new ItemClickListener() {
 			@Override
 			public void itemClick(ItemClickEvent event) {
-				userForm.lazyInit((User)event.getItemId());
+				userForm.lazyInit((User) event.getItemId());
 				userForm.openPopup("Edit Profile");
 			}
 		});

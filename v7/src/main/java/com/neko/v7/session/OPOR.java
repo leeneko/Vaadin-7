@@ -31,6 +31,15 @@ public class OPOR {
 		Creator = creator;
 		Description = description;
 	}
+	public OPOR(OPOR other) {
+		this.DocEntry = other.getDocEntry();
+		this.DocType = other.getDocType();
+		this.Status = other.getStatus();
+		this.DocDate = other.getDocDate();
+		this.DocDueDate = other.getDocDueDate();
+		this.Creator = other.getCreator();
+		this.Description = other.getDescription();
+	}
 	public int getDocEntry() {
 		return DocEntry;
 	}
